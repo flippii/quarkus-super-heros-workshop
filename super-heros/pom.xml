@@ -14,6 +14,7 @@
         <module>rest-villain</module>
         <module>rest-fight</module>
         <module>ui-super-heroes</module>
+        <module>load-super-heroes</module>
     </modules>
 
 </project>

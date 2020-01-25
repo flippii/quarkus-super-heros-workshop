@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import java.util.List;
+import java.util.Optional;
 
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
@@ -24,8 +25,8 @@ public class HeroService {
     }
 
     @Transactional(SUPPORTS)
-    public Hero findHeroById(Long id) {
-        return Hero.findById(id);
+    public Optional<Hero> findHeroById(Long id) {
+        return Optional.ofNullable(Hero.findById(id));
     }
 
     @Transactional(SUPPORTS)

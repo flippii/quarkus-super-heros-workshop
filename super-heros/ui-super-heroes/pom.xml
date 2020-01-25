@@ -5,7 +5,7 @@
 
     <groupId>io.quarkus.workshop.super-heroes</groupId>
     <artifactId>ui-super-heroes</artifactId>
-    <version>01</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>Quarkus Workshop :: Super-Heroes :: Super Heroes UI</name>
 
     <properties>
