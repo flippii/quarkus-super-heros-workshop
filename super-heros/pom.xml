@@ -13,6 +13,7 @@
         <module>rest-hero</module>
         <module>rest-villain</module>
         <module>rest-fight</module>
+        <module>ui-super-heroes</module>
     </modules>
 
 </project>
