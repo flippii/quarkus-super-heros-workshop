@@ -49,11 +49,11 @@ public class FightResource {
     @APIResponse(responseCode = "200", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = Fighters.class, required = true)))
     @Counted(name = "countGetRandomFighters", description = "Counts how many times the getRandomFighters method has been invoked")
     @Timed(name = "timeGetRandomFighters", description = "Times how long it takes to invoke the getRandomFighters method", unit = MetricUnits.MILLISECONDS)
-    @Timeout(250)
+    //@Timeout(250)
     @GET
     @Path("/randomfighters")
     public Response getRandomFighters() throws InterruptedException {
-        veryLongProcess();
+        //veryLongProcess();
         Fighters fighters = service.findRandomFighters();
         LOGGER.debug("Get random fighters " + fighters);
         return Response.ok(fighters).build();
