@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.quarkus.workshop.super-heroes</groupId>
         <artifactId>extension-banner-parent</artifactId>
-        <version>1.0</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>extension-banner</artifactId>
