@@ -10,6 +10,7 @@
     <name>Quarkus Workshop :: Super-Heroes - R00T</name>
 
     <modules>
+        <module>extensions</module>
         <module>super-heros</module>
     </modules>
 
