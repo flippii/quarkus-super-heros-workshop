@@ -4,6 +4,8 @@ import io.quarkus.workshop.superheroes.fight.client.Hero;
 import io.quarkus.workshop.superheroes.fight.client.HeroService;
 import io.quarkus.workshop.superheroes.fight.client.Villain;
 import io.quarkus.workshop.superheroes.fight.client.VillainService;
+import io.smallrye.reactive.messaging.annotations.Channel;
+import io.smallrye.reactive.messaging.annotations.Emitter;
 import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.logging.Logger;
@@ -13,6 +15,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import static javax.transaction.Transactional.TxType.REQUIRED;
@@ -34,12 +37,16 @@ public class FightService {
     @RestClient
     VillainService villainService;
 
+    @Inject
+    @Channel("fights-channel")
+    Emitter<Fight> emitter;
+
     public List<Fight> findAllFights() {
         return Fight.listAll();
     }
 
-    public Fight findFightById(Long id) {
-        return Fight.findById(id);
+    public Optional<Fight> findFightById(Long id) {
+        return Optional.ofNullable(Fight.findById(id));
     }
 
     @Transactional(REQUIRED)
@@ -59,6 +66,9 @@ public class FightService {
 
         fight.fightDate = Instant.now();
         Fight.persist(fight);
+
+        emitter.send(fight);
+
         return fight;
     }
 

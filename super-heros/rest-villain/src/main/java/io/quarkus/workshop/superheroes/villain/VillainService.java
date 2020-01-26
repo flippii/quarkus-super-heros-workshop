@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
@@ -23,8 +24,8 @@ public class VillainService {
     }
 
     @Transactional(SUPPORTS)
-    public Villain findVillainById(Long id) {
-        return Villain.findById(id);
+    public Optional<Villain> findVillainById(Long id) {
+        return Optional.ofNullable(Villain.findById(id));
     }
 
     @Transactional(SUPPORTS)

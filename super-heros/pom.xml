@@ -15,6 +15,7 @@
         <module>rest-fight</module>
         <module>ui-super-heroes</module>
         <module>load-super-heroes</module>
+        <module>event-statistics</module>
     </modules>
 
 </project>
