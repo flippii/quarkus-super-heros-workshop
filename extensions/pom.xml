@@ -11,6 +11,7 @@
 
     <modules>
         <module>extension-banner</module>
+        <module>extension-fault-injector</module>
     </modules>
 
 </project>
