@@ -14,11 +14,15 @@
         <module>super-heros</module>
     </modules>
 
+    <properties>
+        <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven-assembly-plugin.version}</version>
                 <configuration>
                     <finalName>quarkus-super-heroes-workshop</finalName>
                     <appendAssemblyId>false</appendAssemblyId>

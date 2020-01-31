@@ -9,7 +9,7 @@
     <name>Quarkus Workshop :: Super-Heroes :: Villain REST API</name>
 
     <properties>
-        <quarkus.version>1.1.1.Final</quarkus.version>
+        <quarkus.version>1.2.0.Final</quarkus.version>
         <surefire-plugin.version>2.22.1</surefire-plugin.version>
         <junit-jupiter.version>1.12.2</junit-jupiter.version>
         <testcontainers.version>1.12.2</testcontainers.version>
