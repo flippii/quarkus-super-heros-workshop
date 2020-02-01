@@ -24,7 +24,7 @@ public class SuperStats {
     @Incoming("results")
     @Outgoing("team-stats")
     public Flowable<Double> computeTeamStats(Flowable<FightResult> results) {
-        return results.map(fr -> stats.add(fr));
+        return results.map(fightResult -> stats.add(fightResult));
     }
 
     @Incoming("results")
