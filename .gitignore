@@ -4,6 +4,7 @@
 *.iws
 target/
 dist/
+.cache/
 node_modules/
 pom.xml.tag
 pom.xml.releaseBackup

@@ -6,7 +6,11 @@
     "piral"
   ],
   "dependencies": {
-    "piral": "^0.10.2"
+    "bootstrap": "^4.3.1",
+    "piral": "^0.10.2",
+    "piral-auth": "^0.10.2",
+    "piral-search": "^0.10.2",
+    "reactstrap": "^8.0.1"
   },
   "scripts": {
     "start": "piral debug --port 4200",
@@ -15,8 +19,12 @@
   "app": "./src/index.html",
   "pilets": {
     "files": [],
-    "externals": [],
-    "scripts": {},
+    "externals": [
+      "reactstrap"
+    ],
+    "scripts": {
+      "upgrade-pilet": "pilet upgrade --force-overwrite yes"
+    },
     "validators": {},
     "devDependencies": {},
     "preScaffold": "",

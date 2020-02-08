@@ -1,133 +1,151 @@
 import * as React from 'react';
-import { ComponentsState, ErrorComponentsState, Menu, Notifications, SwitchErrorInfo, MenuItemProps } from 'piral';
-import { Link } from 'react-router-dom';
-
-const MenuItem: React.FC<MenuItemProps> = ({ children }) => <li className="nav-item">{children}</li>;
-
-const defaultTiles = (
-  <>
-    <div className="tile rows-2 cols-2">
-      <div className="teaser">
-        <a href="https://piral.io/">Piral</a>
-        <br />
-        for next generation portals
-      </div>
-    </div>
-    <div className="tile rows-2 cols-2">
-      <div className="teaser">
-        <a href="https://www.typescriptlang.org/">TypeScript</a>
-        <br />
-        for writing scalable web apps
-      </div>
-    </div>
-    <div className="tile rows-2 cols-2">
-      <div className="teaser">
-        <a href="https://reactjs.org/">React</a>
-        <br />
-        for building components
-      </div>
-    </div>
-    <div className="tile rows-2 cols-2">
-      <div className="teaser">
-        <a href="http://getbootstrap.com/">Bootstrap</a>
-        <br />
-        for layout and styling
-      </div>
-    </div>
-    <div className="tile rows-2 cols-2">
-      <div className="teaser">
-        <a href="https://sass-lang.com">Sass</a>
-        <br />
-        for crafting custom styles
-      </div>
-    </div>
-  </>
-);
-
-const defaultMenuItems = (
-  <>
-    <MenuItem type="general">
-      <Link className="nav-link text-dark" to="/not-found">
-        Not Found
-      </Link>
-    </MenuItem>
-  </>
-);
+import { useTranslate, ComponentsState, ErrorComponentsState } from 'piral';
+import { SearchInput } from 'piral-search';
+import { Layout, LanguagePicker } from './components';
+import { getTileClass } from './utils';
 
 export const errors: Partial<ErrorComponentsState> = {
+  menu: () => <span />,
+  extension: () => <div />,
+  feed: ({ error }) => (
+    <div className="pi-error">
+      <img src={require('./images/error.svg')} alt="Error" />
+      <div className="pi-title">Data Unavailable</div>
+      <div className="pi-description">
+        The demanded data has not been found. Please contact support to resolve this issue.
+      </div>
+      <div className="pi-details">{error}</div>
+    </div>
+  ),
+  loading: () => (
+    <div className="pi-center">
+      <div className="pi-error">
+        <img src={require('./images/error.svg')} alt="Error" />
+        <div className="pi-title">Something Went Wrong</div>
+        <div className="pi-description">
+          An error occured during the loading process. Try refreshing or come back later.
+        </div>
+      </div>
+    </div>
+  ),
   not_found: () => (
-    <div>
-      <p className="error">Could not find the requested page. Are you sure it exists?</p>
-      <p>
-        Go back <Link to="/">to the dashboard</Link>.
-      </p>
+    <div className="pi-error">
+      <img src={require('./images/not-found.svg')} alt="Not Found" />
+      <div className="pi-title">Page Not Found</div>
+      <div className="pi-description">
+        The provided URL does not map to a page. Please contact support to resolve this issue.
+      </div>
+    </div>
+  ),
+  page: () => (
+    <div className="pi-error">
+      <img src={require('./images/error.svg')} alt="Error" />
+      <div className="pi-title">Page Crashed</div>
+      <div className="pi-description">
+        Sorry for the inconvenience. We try to resolve the issue as soon as possible.
+      </div>
+    </div>
+  ),
+  modal: ({ onClose }) => (
+    <div className="pi-error">
+      <img src={require('./images/error.svg')} alt="Error" />
+      <div className="pi-title">Dialog Crashed</div>
+      <div className="pi-description">
+        <p>Sorry for the inconvenience. We try to resolve the issue as soon as possible.</p>
+        <button className="btn btn-primary" onClick={onClose}>
+          Close
+        </button>
+      </div>
+    </div>
+  ),
+  tile: () => (
+    <div className="pi-error">
+      <div className="pi-title">Tile Crashed</div>
+      <div className="pi-description">Sorry for the inconvenience.</div>
+    </div>
+  ),
+  unknown: () => (
+    <div className="pi-error">
+      <img src={require('./images/error.svg')} alt="Error" />
+      <div className="pi-title">Unknown Error</div>
+      <div className="pi-description">An unknown error occured.</div>
     </div>
   ),
 };
 
 export const layout: Partial<ComponentsState> = {
-  ErrorInfo: props => (
-    <div>
-      <h1>Error</h1>
-      <SwitchErrorInfo {...props} />
+  Layout,
+  LanguagesPicker: LanguagePicker,
+  LoadingIndicator: () => (
+    <div className="pi-center">
+      <div className="pi-spinner">Loading</div>
     </div>
   ),
-  DashboardContainer: ({ children }) => (
-    <div>
-      <h1>Hello, world!</h1>
-      <p>Welcome to your new microfrontend app shell, built with:</p>
-      <div className="tiles">
-        {defaultTiles}
-        {children}
-      </div>
-    </div>
-  ),
-  DashboardTile: ({ columns, rows, children }) => <div className={`tile cols-${columns} rows-${rows}`}>{children}</div>,
-  Layout: ({ children }) => (
-    <div>
-      <Notifications />
-      <Menu type="general" />
-      <div className="container">{children}</div>
-    </div>
-  ),
-  MenuContainer: ({ children }) => {
-    const [collapsed, setCollapsed] = React.useState(true);
+  DashboardContainer: ({ children }) => {
+    const translate = useTranslate();
     return (
-      <header>
-        <nav className="navbar navbar-light navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3">
-          <div className="container">
-            <Link className="navbar-brand" to="/">
-              Piral
-            </Link>
-            <button
-              aria-label="Toggle navigation"
-              type="button"
-              onClick={() => setCollapsed(!collapsed)}
-              className="navbar-toggler mr-2">
-              <span className="navbar-toggler-icon" />
-            </button>
-            <div
-              className={`collapse navbar-collapse d-sm-inline-flex flex-sm-row-reverse ${collapsed ? '' : 'show'}`}
-              aria-expanded={!collapsed}>
-              <ul className="navbar-nav flex-grow">
-                {children}
-                {defaultMenuItems}
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </header>
+      <div className="pi-content">
+        <h1>{translate('sample')}</h1>
+        <div className="pi-dashboard">{children}</div>
+      </div>
     );
   },
-  MenuItem,
-  NotificationsHost: ({ children }) => <div className="notifications">{children}</div>,
-  NotificationsToast: ({ options, onClose, children }) => (
-    <div className={`notification-toast ${options.type}`}>
-      <div className="notification-toast-details">
-        {options.title && <div className="notification-toast-title">{options.title}</div>}
-        <div className="notification-toast-description">{children}</div>
+  DashboardTile: ({ children, rows, columns }) => <div className={getTileClass(columns, rows)}>{children}</div>,
+  MenuContainer: ({ children }) => <div className="pi-menu">{children}</div>,
+  MenuItem: ({ children }) => <div className="pi-item">{children}</div>,
+  SearchContainer: ({ loading, children }) => (
+    <div className="pi-search">
+      <SearchInput />
+      <div className="pi-details">
+        {children}
+        {loading && (
+          <div className="pi-center">
+            <div className="pi-spinner" />
+          </div>
+        )}
       </div>
-      <div className="notification-toast-close" onClick={onClose} />
     </div>
   ),
+  SearchInput: ({ setValue, value }) => {
+    const translate = useTranslate();
+    return (
+      <input
+        type="search"
+        required
+        placeholder={translate('search')}
+        onChange={e => setValue(e.target.value)}
+        value={value}
+      />
+    );
+  },
+  SearchResult: ({ children }) => <div className="pi-item">{children}</div>,
+  NotificationsHost: ({ children }) => <div className="pi-notifications">{children}</div>,
+  NotificationsToast: ({ options, onClose, children }) => (
+    <div className={`pi-item ${options.type}`}>
+      <div className="pi-details">
+        {options.title && <div className="pi-title">{options.title}</div>}
+        <div className="pi-description">{children}</div>
+      </div>
+      <div className="pi-close" onClick={onClose} />
+    </div>
+  ),
+  ModalsHost: ({ children, open }) => {
+    React.useEffect(() => {
+      const body = document.body;
+
+      if (open) {
+        body.style.top = `-${window.scrollY}px`;
+        body.classList.add('pi-modal-open');
+      } else {
+        const offset = -parseInt(body.style.top || '0', 10);
+        body.classList.remove('pi-modal-open');
+        body.style.top = '';
+        window.scrollTo(0, offset);
+      }
+
+      return () => {};
+    }, [open]);
+    return <div className="pi-modal">{children}</div>;
+  },
+  ModalsDialog: ({ children }) => <div className="pi-modal-dialog">{children}</div>,
 };
