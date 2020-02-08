@@ -50,7 +50,7 @@ public class HeroResource {
     @Timed(name = "timeGetAllHeroes", description = "Times how long it takes to invoke the getAllHeroes method", unit = MetricUnits.MILLISECONDS)
     @GET
     public Response getAllHeroes() {
-        List<Hero> heroes = service.findAllHeroes();
+        HeroService.PageResult<Hero> heroes = service.findAllHeroes();
         LOGGER.debug("Total number of heroes " + heroes);
         return Response.ok(heroes).build();
     }

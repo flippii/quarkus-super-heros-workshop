@@ -1,5 +1,8 @@
 package io.quarkus.workshop.superheroes.hero;
 
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
+import io.quarkus.panache.common.Page;
+import io.quarkus.panache.common.Sort;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -20,8 +23,34 @@ public class HeroService {
     int levelMultiplier;
 
     @Transactional(SUPPORTS)
-    public List<Hero> findAllHeroes() {
-        return Hero.listAll();
+    public PageResult<Hero> findAllHeroes() {
+        PanacheQuery<Hero> heroes = Hero.findAll(Sort.ascending("id"));
+
+        List<Hero> result = heroes.page(Page.of(1, 10)).list();
+
+        Long count = heroes.count();
+
+        return new PageResult<>(result, count);
+    }
+
+    public static final class PageResult<T> {
+
+        private List<T> result;
+        private Long count;
+
+        public PageResult(List<T> result, Long count) {
+            this.result = result;
+            this.count = count;
+        }
+
+        public List<T> getResult() {
+            return result;
+        }
+
+        public Long getCount() {
+            return count;
+        }
+
     }
 
     @Transactional(SUPPORTS)
