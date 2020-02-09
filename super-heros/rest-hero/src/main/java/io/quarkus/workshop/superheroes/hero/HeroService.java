@@ -23,34 +23,15 @@ public class HeroService {
     int levelMultiplier;
 
     @Transactional(SUPPORTS)
-    public PageResult<Hero> findAllHeroes() {
-        PanacheQuery<Hero> heroes = Hero.findAll(Sort.ascending("id"));
-
-        List<Hero> result = heroes.page(Page.of(1, 10)).list();
-
-        Long count = heroes.count();
-
-        return new PageResult<>(result, count);
+    public List<Hero> findAllHeroes() {
+        return Hero.listAll();
     }
 
-    public static final class PageResult<T> {
-
-        private List<T> result;
-        private Long count;
-
-        public PageResult(List<T> result, Long count) {
-            this.result = result;
-            this.count = count;
-        }
-
-        public List<T> getResult() {
-            return result;
-        }
-
-        public Long getCount() {
-            return count;
-        }
-
+    @Transactional(SUPPORTS)
+    public HeroPage findHeroes(Page page, Sort sorting) {
+        PanacheQuery<Hero> heroes = Hero.findAll(sorting);
+        List<Hero> result = heroes.page(page).list();
+        return HeroPage.of(result, page, heroes.count());
     }
 
     @Transactional(SUPPORTS)

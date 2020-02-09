@@ -2,11 +2,11 @@ export function fetchBlogPosts(page, limit, filter, sort, direction) {
   let p = new URLSearchParams();
   p.append('page', page || 1);
   p.append('limit', limit || 10);
-  p.append('filter', filter || '');
-  p.append('sort', sort || '');
-  p.append('direction', direction || '');
+  //p.append('filter', filter || '');
+  p.append('sort', sort || 'id');
+  p.append('direction', direction || 'Ascending');
 
-  return fetch('http://localhost:8083/api/heroes', {
+  return fetch('http://localhost:8083/api/heroes?' + p, {
     method: 'GET',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }

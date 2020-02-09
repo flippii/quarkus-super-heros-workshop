@@ -3,7 +3,7 @@ import { PageComponentProps } from "hero-shell";
 import DataTable from './components/DataTable';
 import { deleteBlogPost, fetchBlogPosts } from "./actions/heroActions";
 
-export class HerosComponent extends React.PureComponent<PageComponentProps> {
+export class HerosComponent extends React.Component<PageComponentProps> {
 
   constructor(props) {
     super(props);
@@ -26,7 +26,7 @@ export class HerosComponent extends React.PureComponent<PageComponentProps> {
     fetchBlogPosts(page, limit, filter, sort, direction)
       .then(data => {
         this.setState({
-          heroes: data.result,
+          heroes: data.heroes,
           currentPageNumber: data.currentPageNumber,
           numItemsPerPage: data.numItemsPerPage,
           totalItems: data.totalCount

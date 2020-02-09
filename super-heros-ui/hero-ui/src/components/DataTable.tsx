@@ -7,12 +7,23 @@ export interface DataTableProps {
   totalPages: number,
   currentPageNumber: number,
   itemsPerPage: number,
-  onDelete: ({ id }) => {},
-  onPaginate: ({ page }) => {},
-  onSort: ({ sortBy, direction }) => {}
+  onDelete: (id: number) => void,
+  onPaginate: (page: number) => void,
+  onSort: (sortBy: string, direction: string) => void
 }
 
-export default class DataTable extends React.PureComponent<DataTableProps> {
+export interface DataTableState {
+  heroes: Array<any>,
+  totalPages: number,
+  currentPageNumber: number,
+  itemsPerPage: number,
+  reverse: boolean,
+  titleFilter: string,
+  limit: number,
+  sortBy: string
+}
+
+export default class DataTable extends React.Component<DataTableProps, DataTableState> {
 
   constructor(props) {
     super(props);
@@ -24,7 +35,8 @@ export default class DataTable extends React.PureComponent<DataTableProps> {
       itemsPerPage: props.itemsPerPage,
       reverse: false,
       titleFilter: '',
-      limit: props.itemsPerPage
+      limit: props.itemsPerPage,
+      sortBy: 'asc'
     };
   }
 
@@ -50,12 +62,12 @@ export default class DataTable extends React.PureComponent<DataTableProps> {
       sortBy: sortBy,
       reverse: !this.state.reverse
     });
+
     this.props.onSort(sortBy, this.state.reverse ? 'desc' : 'asc');
   }
 
   render() {
-    // @ts-ignore
-    const { limit, titleFilter, heroes, totalPages, currentPageNumber } = this.state;
+    const { heroes } = this.state;
 
     return (
       <div>
