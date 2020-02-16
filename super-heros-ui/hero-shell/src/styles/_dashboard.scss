@@ -1,0 +1,60 @@
+$tile-height: 70px;
+$tile-width: 70px;
+$tile-gap: 10px;
+
+.jh-dashboard-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.jh-dashboard {
+  flex: 1;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, $tile-width);
+  grid-template-rows: repeat(auto-fit, $tile-height);
+  grid-gap: $tile-gap;
+  overflow: visible;
+
+  .jh-tile {
+    display: flex;
+    position: relative;
+
+    &.small {
+      grid-column: span 1;
+      grid-row: span 1;
+      width: $tile-width;
+      height: $tile-height;
+    }
+
+    &.medium {
+      grid-column: span 2;
+      grid-row: span 2;
+      width: 2 * $tile-width + 1 * $tile-gap;
+      height: 2 * $tile-height + 1 * $tile-gap;
+    }
+
+    &.wide {
+      grid-column: span 4;
+      grid-row: span 2;
+      width: 4 * $tile-width + 3 * $tile-gap;
+      height: 2 * $tile-height + 1 * $tile-gap;
+    }
+
+    &.large {
+      grid-column: span 4;
+      grid-row: span 4;
+      width: 4 * $tile-width + 3 * $tile-gap;
+      height: 4 * $tile-height + 3 * $tile-gap;
+    }
+
+    &:hover {
+      border-color: rgba(0, 0, 0, .50);
+    }
+  }
+}

@@ -6,10 +6,13 @@
     "piral"
   ],
   "dependencies": {
-    "bootstrap": "^4.3.1",
-    "piral": "^0.10.2",
-    "piral-auth": "^0.10.2",
-    "piral-search": "^0.10.2",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "piral": "^0.10.5",
+    "piral-auth": "^0.10.5",
+    "piral-search": "^0.10.5",
+    "piral-translate": "^0.10.5",
+    "popper.js": "^1.16.1",
     "reactstrap": "^8.0.1"
   },
   "scripts": {
@@ -40,6 +43,6 @@
     "@types/react-router-dom": "latest",
     "piral-cli": "latest",
     "sass": "^1.25.0",
-    "typescript": "latest"
+    "typescript": "^3.7.5"
   }
 }

@@ -1,80 +1,26 @@
 import * as React from 'react';
-import { useTranslate, ComponentsState, ErrorComponentsState } from 'piral';
+import { useTranslate, ComponentsState } from 'piral';
 import { SearchInput } from 'piral-search';
-import { Layout, LanguagePicker } from './components';
 import { getTileClass } from './utils';
+import { LanguagePicker } from "./layout/menus";
+import { Layout } from "./layout-main";
+import { Card, CardTitle, CardText } from 'reactstrap'
 
-export const errors: Partial<ErrorComponentsState> = {
-  menu: () => <span />,
-  extension: () => <div />,
-  feed: ({ error }) => (
-    <div className="pi-error">
-      <img src={require('./images/error.svg')} alt="Error" />
-      <div className="pi-title">Data Unavailable</div>
-      <div className="pi-description">
-        The demanded data has not been found. Please contact support to resolve this issue.
-      </div>
-      <div className="pi-details">{error}</div>
-    </div>
-  ),
-  loading: () => (
-    <div className="pi-center">
-      <div className="pi-error">
-        <img src={require('./images/error.svg')} alt="Error" />
-        <div className="pi-title">Something Went Wrong</div>
-        <div className="pi-description">
-          An error occured during the loading process. Try refreshing or come back later.
-        </div>
-      </div>
-    </div>
-  ),
-  not_found: () => (
-    <div className="pi-error">
-      <img src={require('./images/not-found.svg')} alt="Not Found" />
-      <div className="pi-title">Page Not Found</div>
-      <div className="pi-description">
-        The provided URL does not map to a page. Please contact support to resolve this issue.
-      </div>
-    </div>
-  ),
-  page: () => (
-    <div className="pi-error">
-      <img src={require('./images/error.svg')} alt="Error" />
-      <div className="pi-title">Page Crashed</div>
-      <div className="pi-description">
-        Sorry for the inconvenience. We try to resolve the issue as soon as possible.
-      </div>
-    </div>
-  ),
-  modal: ({ onClose }) => (
-    <div className="pi-error">
-      <img src={require('./images/error.svg')} alt="Error" />
-      <div className="pi-title">Dialog Crashed</div>
-      <div className="pi-description">
-        <p>Sorry for the inconvenience. We try to resolve the issue as soon as possible.</p>
-        <button className="btn btn-primary" onClick={onClose}>
-          Close
-        </button>
-      </div>
-    </div>
-  ),
-  tile: () => (
-    <div className="pi-error">
-      <div className="pi-title">Tile Crashed</div>
-      <div className="pi-description">Sorry for the inconvenience.</div>
-    </div>
-  ),
-  unknown: () => (
-    <div className="pi-error">
-      <img src={require('./images/error.svg')} alt="Error" />
-      <div className="pi-title">Unknown Error</div>
-      <div className="pi-description">An unknown error occured.</div>
-    </div>
-  ),
-};
+const defaultTiles = (
+  <>
+    <Card body className="jh-tile wide">
+      <CardTitle>
+        <h5>Piral Homepage</h5>
+      </CardTitle>
+      <CardText>
+        <a href="https://piral.io/">Piral</a> for next generation portals.
+      </CardText>
+    </Card>
+  </>
+);
 
 export const layout: Partial<ComponentsState> = {
-  Layout,
+  Layout: Layout,
   LanguagesPicker: LanguagePicker,
   LoadingIndicator: () => (
     <div className="pi-center">
@@ -84,15 +30,30 @@ export const layout: Partial<ComponentsState> = {
   DashboardContainer: ({ children }) => {
     const translate = useTranslate();
     return (
-      <div className="pi-content">
-        <h1>{translate('sample')}</h1>
-        <div className="pi-dashboard">{children}</div>
+      <div className="jh-dashboard-container">
+        <h2>{translate('dashboardTitle')}</h2>
+        <div className="jh-dashboard">
+          {defaultTiles}
+          {children}
+        </div>
       </div>
     );
   },
-  DashboardTile: ({ children, rows, columns }) => <div className={getTileClass(columns, rows)}>{children}</div>,
-  MenuContainer: ({ children }) => <div className="pi-menu">{children}</div>,
-  MenuItem: ({ children }) => <div className="pi-item">{children}</div>,
+  DashboardTile: ({ children, rows, columns }) => {
+    return (
+      <div className={getTileClass(columns, rows)}>{children}</div>
+    );
+  },
+  MenuContainer: ({ children }) => {
+    return (
+      <div className="pi-menu">{children}</div>
+    );
+  },
+  MenuItem: ({ children }) => {
+    return (
+      <div className="pi-item">{children}</div>
+    );
+  },
   SearchContainer: ({ loading, children }) => (
     <div className="pi-search">
       <SearchInput />
@@ -118,8 +79,16 @@ export const layout: Partial<ComponentsState> = {
       />
     );
   },
-  SearchResult: ({ children }) => <div className="pi-item">{children}</div>,
-  NotificationsHost: ({ children }) => <div className="pi-notifications">{children}</div>,
+  SearchResult: ({ children }) => {
+    return (
+      <div className="pi-item">{children}</div>
+    );
+  },
+  NotificationsHost: ({ children }) => {
+    return (
+      <div className="pi-notifications">{children}</div>
+    );
+  },
   NotificationsToast: ({ options, onClose, children }) => (
     <div className={`pi-item ${options.type}`}>
       <div className="pi-details">

@@ -1,5 +1,5 @@
 export function getTileClass(cols: number, rows: number) {
-  const baseCls = 'pi-tile';
+  const baseCls = 'jh-tile';
 
   if (cols > 3 && rows > 3) {
     return `${baseCls} large`;

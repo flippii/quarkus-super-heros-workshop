@@ -2,8 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { renderInstance, getUserLocale, setupLocalizer } from 'piral';
 import { createAuthApi } from 'piral-auth';
 import { createSearchApi } from 'piral-search';
-import { setupFooter, setupMenu } from './parts';
-import { layout, errors } from './layout';
+import { layout } from './layout';
+import { errors } from "./error";
 
 const feedUrl = 'https://feed.piral.io/api/v1/pilet/empty';
 
@@ -13,11 +13,18 @@ renderInstance({
       language: getUserLocale,
       messages: {
         de: {},
-        en: {},
+        en: {
+          dashboardTitle: 'Welcome to the Piral Sample App!',
+          search: 'Search ...',
+          signIn: 'Sign in',
+          signOut: 'Sign out',
+          account: 'Account',
+          entities: 'Entities'
+        },
       },
     }),
     menu: {
-      items: [...setupMenu(), ...setupFooter()],
+      items: [],
     },
   },
   extendApi: [createAuthApi(), createSearchApi()],

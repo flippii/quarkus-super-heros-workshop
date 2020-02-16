@@ -10,14 +10,22 @@ function getSampleTranslations(language: string) {
     case 'en':
       return {
         ...languages,
-        sample: 'Welcome to the Piral Sample App!',
+        dashboardTitle: 'Welcome to the Piral Sample App!',
         search: 'Search ...',
+        signIn: 'Sign in',
+        signOut: 'Sign out',
+        account: 'Account',
+        entities: 'Entities'
       };
     case 'de':
       return {
         ...languages,
-        sample: 'Willkommen in der Piral Beispielanwendung!',
+        dashboardTitle: 'Willkommen in der Piral Beispielanwendung!',
         search: 'Suche ...',
+        signIn: 'Einloggen',
+        signOut: 'Ausloggen',
+        account: 'Account',
+        entities: 'Modelle'
       };
   }
 }
