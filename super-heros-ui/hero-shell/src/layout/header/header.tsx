@@ -3,8 +3,8 @@ import { Navbar, Nav, NavbarToggler, Collapse } from 'reactstrap';
 import { Home, Brand } from './header-components';
 import { useState } from "react";
 import { Languages } from 'piral';
-import { AccountMenu } from "../menus/account";
-import { EntitiesMenu } from "../menus/entities";
+import { AccountMenu } from "../menus";
+import { EntitiesMenu } from "../menus";
 
 export const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);

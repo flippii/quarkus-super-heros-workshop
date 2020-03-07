@@ -19,7 +19,9 @@ export const AccountMenu: React.FC = () => {
   );
 
   return (
-    <NavDropdown icon="fa fa-user" name={translate('account')} id="account-menu">
+    <NavDropdown icon="fa fa-user"
+                 name={translate('account')}>
+
       {currentUser ? (
         <>
           {items}

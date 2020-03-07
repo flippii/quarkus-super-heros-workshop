@@ -1,4 +1,4 @@
-.pi-notifications {
+.jh-notifications {
   position: fixed;
   display: flex;
   align-items: flex-end;
@@ -6,14 +6,14 @@
   right: 2em;
   bottom: 2em;
 
-  .pi-item {
+  .jh-item {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: center;
     text-align: left;
     padding: 0.8em;
-    background-color: $bg-color;
+    background-color: white;
     max-width: 500px;
     position: relative;
     box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.2);
@@ -47,17 +47,17 @@
       height: 2px;
     }
 
-    .pi-details {
+    .jh-details {
       flex: 1;
 
-      .pi-title {
+      .jh-title {
         color: #3e3e3e;
         font-weight: 700;
         margin-top: 0;
         margin-bottom: 8px;
       }
 
-      .pi-description {
+      .jh-description {
         font-size: 14px;
         margin-top: 0;
         margin-bottom: 0;
@@ -65,7 +65,7 @@
       }
     }
 
-    .pi-close {
+    .jh-close {
       width: 14px;
       cursor: pointer;
       height: 14px;

@@ -9,13 +9,14 @@ export interface IMenuItem {
 }
 
 export default class MenuItem extends React.Component<IMenuItem> {
+
   render() {
     const { to, icon, id, children } = this.props;
-
     return (
       <DropdownItem tag={Link} to={to} id={id}>
         <i className={icon} /> {children}
       </DropdownItem>
     );
   }
+
 }

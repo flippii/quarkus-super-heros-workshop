@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { renderInstance, getUserLocale, setupLocalizer } from 'piral';
 import { createAuthApi } from 'piral-auth';
-import { createSearchApi } from 'piral-search';
 import { layout } from './layout';
 import { errors } from "./error";
 
@@ -27,7 +26,7 @@ renderInstance({
       items: [],
     },
   },
-  extendApi: [createAuthApi(), createSearchApi()],
+  extendApi: [createAuthApi()],
   requestPilets() {
     return fetch(feedUrl)
       .then(res => res.json())

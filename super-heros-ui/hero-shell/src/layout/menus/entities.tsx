@@ -12,9 +12,8 @@ export const EntitiesMenu: React.FC = () => {
       {itemNames.length > 0 ? (
         <>
           <NavDropdown icon="fa fa-list"
-                          name={translate('entities')}
-                          id="entity-menu"
-                          style={{ maxHeight: '80vh', overflow: 'auto' }}>
+                       name={translate('entities')}
+                       style={{ maxHeight: '80vh', overflow: 'auto' }}>
             <>
               {itemNames.map(name => {
                 const Component = menuItems[name].component;

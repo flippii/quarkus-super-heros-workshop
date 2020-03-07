@@ -9,7 +9,9 @@ export const LanguagePicker: React.FC<LanguagesPickerProps> = ({ selected, avail
   const translate = useTranslate();
 
   return (
-    <NavDropdown icon="fa fa-flag" name={language ? translate(language) : undefined}>
+    <NavDropdown icon="fa fa-flag"
+                 name={language ? translate(language) : undefined}>
+
       {available.map(lang => (
         <DropdownItem key={lang} value={lang} onClick={() => setLanguage(lang)}>
           {translate(lang)}

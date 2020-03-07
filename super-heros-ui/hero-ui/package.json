@@ -10,12 +10,12 @@
   },
   "devDependencies": {
     "hero-shell": "file:D:\\Projekte\\hobby-projekte\\quarkus-super-heros-workshop\\super-heros-ui\\hero-shell\\dist\\develop\\hero-shell-1.0.0.tgz",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "@types/react-router": "latest",
-    "@types/react-router-dom": "latest",
-    "@types/node": "latest",
-    "typescript": "latest",
+    "@types/react": "^16.8.2",
+    "@types/react-dom": "^16.8.0",
+    "@types/react-router": "^5.0.0",
+    "@types/react-router-dom": "^5.1.3",
+    "@types/node": "^13.7.1",
+    "typescript": "^3.7.5",
     "reactstrap": "8.4.1",
     "@dbeining/react-atom": "4.1.5",
     "@libre/atom": "1.3.3",
@@ -55,7 +55,7 @@
     "comment": "Keep this section to allow running `piral upgrade`.",
     "name": "hero-shell",
     "version": "1.0.0",
-    "tooling": "0.10.2",
+    "tooling": "0.10.9",
     "externals": [
       "reactstrap"
     ],
